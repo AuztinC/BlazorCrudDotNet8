@@ -57,10 +57,5 @@ namespace BlazorCrudDotNet8.Shared.Services
         {
             return await _context.Games.FindAsync(id);
         }
-
-        Task<bool> IGameService.DeleteGame(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

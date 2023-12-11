@@ -16,7 +16,7 @@ namespace BlazorCrudDotNet8.Controllers
             _gameService = gameService;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGameById(int id)
         {
             var game = await _gameService.GetGameById(id);
@@ -32,7 +32,7 @@ namespace BlazorCrudDotNet8.Controllers
 
         }
 
-        [HttpPost("{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<Game>> EditGames(int id, Game game)
         {
             var updatedGame = await _gameService.EditGame(id, game);

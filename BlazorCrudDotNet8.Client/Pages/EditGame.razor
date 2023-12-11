@@ -1,7 +1,7 @@
 ﻿@page "/edit-game"
 @page "/edit-game/{id:int}"
 @inject IGameService GameService
-@rendermode InteractiveWebAssembly
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 
 
 @if(Id == null)
@@ -11,6 +11,7 @@
 }
 else
 {
+    Console.WriteLine("edit game");
     <h3>Edit @game.Name</h3>
 }
 
@@ -20,18 +21,22 @@ else
     <button type="submit" class="btn btn-primary">Submit</button>
     @if(Id != null)
     {
-        <button @onclick="DeleteGame" type="button" class="btn btn-primary">Delete</button>
+        <button @onclick="DeleteGame" type="button" class="btn btn-danger">Delete</button>
     }
 </EditForm>
 
-    @code {
+@code {
     [Parameter]
     public int? Id { get; set; }
     Game game { get; set; } = new Game { Name = string.Empty };
 
     protected override async Task OnParametersSetAsync()
     {
-        game = await GameService.GetGameById((int)Id);
+        if(Id != null)
+        {
+            game = await GameService.GetGameById((int)Id);
+            
+        }
     }
 
     async Task HandleSubmit()

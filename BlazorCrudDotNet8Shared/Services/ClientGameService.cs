@@ -21,7 +21,7 @@ namespace BlazorCrudDotNet8Shared.Services
         public async Task<Game> AddGame(Game game)
         {
             var result = await _httpClient
-                .PostAsJsonAsync<Game>("/api/game", game);
+                .PostAsJsonAsync("/api/game", game);
             return await result.Content.ReadFromJsonAsync<Game>();
         }
 
